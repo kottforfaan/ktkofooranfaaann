@@ -998,9 +998,9 @@ do
             end]]
         end
         --
-        utility:Connection(uis.InputBegan,function(Input)
+        utility:Connection(uis.InputBegan,function(Input, GPE)
             for _, func in pairs(library.began) do
-                if not window.dragging then
+                if not window.dragging and not GPE then
                     local e,s = pcall(function()
                         func(Input)
                     end)
