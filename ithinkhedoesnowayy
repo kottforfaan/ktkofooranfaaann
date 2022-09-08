@@ -998,11 +998,11 @@ do
             end]]
         end
         --
-        utility:Connection(uis.InputBegan,function(Input)
+        utility:Connection(uis.InputBegan,function(Input, GPE)
             for _, func in pairs(library.began) do
                 if not window.dragging then
                     local e,s = pcall(function()
-                        func(Input)
+                        func(Input, GPE)
                     end)
                 else
                     break
@@ -1937,9 +1937,9 @@ do
             --
             keybind:Change(def)
             --
-            library.began[#library.began + 1] = function(Input)
+            library.began[#library.began + 1] = function(Input, GPE)
                 if keybind.current[1] and keybind.current[2] then
-                    if Input.KeyCode == Enum[keybind.current[1]][keybind.current[2]] or Input.UserInputType == Enum[keybind.current[1]][keybind.current[2]] then
+                    if not GPE and (Input.KeyCode == Enum[keybind.current[1]][keybind.current[2]] or Input.UserInputType == Enum[keybind.current[1]][keybind.current[2]]) then
                         if keybind.mode == "Hold" then
                             local old = keybind.active
                             keybind.active = toggle:Get()
