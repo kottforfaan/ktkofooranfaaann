@@ -2428,6 +2428,13 @@ do
                 end
             end
         end
+	--
+	function dropdown:UpdateOptions(value)
+	    if typeof(value) == "table" then
+		options = value
+		dropdown:Update()
+	    end
+	end
         --
         function dropdown:Set(value)
             if typeof(value) == "string" and table.find(options, value) then
